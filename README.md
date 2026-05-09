@@ -1,6 +1,6 @@
 # Binary Timer
 
-Binary Timer is a simple countdown timer that counts down in binary.
+Binary Timer is a simple countdown timer and stopwatch that counts in binary.
 
 Available online at [https://kungfux.github.io/binarytimer/](https://kungfux.github.io/binarytimer/)
 
@@ -14,6 +14,7 @@ Available online at [https://kungfux.github.io/binarytimer/](https://kungfux.git
 - Presets for 1, 2, 3, 5, 10, 15, 30, 60 minutes
 - Controls to prolong countdown time
 - Sound alarm when countdown is finished
+- Editable title
 - Dark/light themes
 
 ## Available parameters
