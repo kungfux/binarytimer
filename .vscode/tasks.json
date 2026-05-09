@@ -1,0 +1,48 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "label": "npm: dev",
+      "detail": "vite",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": [],
+      "label": "npm: lint",
+      "detail": "eslint .",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Build",
+      "type": "npm",
+      "script": "build",
+      "group": {
+        "kind": "build"
+      },
+      "problemMatcher": [],
+      "detail": "Create a production build."
+    },
+    {
+      "label": "Publish",
+      "type": "npm",
+      "script": "publish",
+      "group": {
+        "kind": "build"
+      },
+      "problemMatcher": [],
+      "detail": "Publish to the internet.",
+      "dependsOn": ["Build"]
+    }
+  ]
+}
