@@ -1,19 +1,34 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { faPenToSquare, faSquareCheck, faSquareXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleCheck,
+  faCircleXmark,
+  faClockRotateLeft,
+  faPencil,
+} from "@fortawesome/free-solid-svg-icons";
 import { IconButton } from "./IconButton.component";
 import styles from "./EditableTitle.component.module.css";
 
 const EditableTitle = () => {
   const countdownTitleSettingKey = "title";
-  const [displayText, setDisplayText] = useState("Please stand by");
-  const [newText, setNewText] = useState("Please stand by");
+  const defaultTitle = "Please stand by";
+  const [displayText, setDisplayText] = useState(defaultTitle);
+  const [newText, setNewText] = useState(defaultTitle);
   const [isEditVisible, setEditVisible] = useState(false);
   const [isEditMode, setEditMode] = useState(false);
+
+  useEffect(() => {
+    const titleSettingValue = localStorage.getItem(countdownTitleSettingKey);
+    if (titleSettingValue) {
+      setNewText(titleSettingValue);
+      setDisplayText(titleSettingValue);
+    }
+  }, []);
 
   const accept = useCallback(() => {
     setDisplayText(newText);
     setEditMode(false);
     setEditVisible(false);
+    localStorage.setItem(countdownTitleSettingKey, newText);
   }, [newText]);
 
   const discard = useCallback(() => {
@@ -21,37 +36,50 @@ const EditableTitle = () => {
     setEditVisible(false);
   }, []);
 
+  const reset = useCallback(() => {
+    setNewText(defaultTitle);
+    setDisplayText(defaultTitle);
+    setEditMode(false);
+    setEditVisible(false);
+    localStorage.setItem(countdownTitleSettingKey, defaultTitle);
+  }, []);
+
   const confirmDiscardButtons = useMemo(
     () => (
       <div>
-        <IconButton tooltip="Accept" icon={faSquareCheck} color="#05df72" onClick={accept} />
-        <IconButton tooltip="Discard" icon={faSquareXmark} color="#ff6467" onClick={discard} />
+        <IconButton
+          tooltip="Accept"
+          icon={faCircleCheck}
+          color="#05df72"
+          onClick={accept}
+        />
+        <IconButton
+          tooltip="Discard"
+          icon={faCircleXmark}
+          color="#ff6467"
+          onClick={discard}
+        />
+        <IconButton
+          tooltip="Reset to default"
+          icon={faClockRotateLeft}
+          color="#ffd43b"
+          onClick={reset}
+        />
       </div>
     ),
-    [accept, discard]
+    [accept, discard, reset],
   );
-
-  useEffect(() => {
-    const titleSettingValue = localStorage.getItem(countdownTitleSettingKey);
-    if (titleSettingValue) {
-      setDisplayText(titleSettingValue);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(countdownTitleSettingKey, displayText);
-  }, [displayText]);
 
   const editButton = useMemo(
     () => (
       <IconButton
-        icon={faPenToSquare}
+        icon={faPencil}
         color="#ffd43b"
         tooltip="Edit title"
         onClick={() => setEditMode(true)}
       />
     ),
-    []
+    [],
   );
 
   return (
@@ -71,7 +99,7 @@ const EditableTitle = () => {
           <input
             type="text"
             className={styles.input}
-            defaultValue={newText}
+            value={newText}
             autoFocus
             onChange={(e) => {
               setNewText(e.target.value);

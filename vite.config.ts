@@ -4,6 +4,11 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   base: '/binarytimer/',
+  server: {
+    watch: {
+      usePolling: true,
+    },
+  },
   plugins: [react(),
     VitePWA({
       registerType: 'autoUpdate',
