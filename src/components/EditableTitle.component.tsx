@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import {
   faCircleCheck,
   faCircleXmark,
@@ -11,18 +11,15 @@ import styles from "./EditableTitle.component.module.css";
 const EditableTitle = () => {
   const countdownTitleSettingKey = "title";
   const defaultTitle = "Please stand by";
-  const [displayText, setDisplayText] = useState(defaultTitle);
-  const [newText, setNewText] = useState(defaultTitle);
+
+  const getInitialTitle = () => {
+    return localStorage.getItem(countdownTitleSettingKey) || defaultTitle;
+  };
+
+  const [displayText, setDisplayText] = useState(getInitialTitle);
+  const [newText, setNewText] = useState(getInitialTitle);
   const [isEditVisible, setEditVisible] = useState(false);
   const [isEditMode, setEditMode] = useState(false);
-
-  useEffect(() => {
-    const titleSettingValue = localStorage.getItem(countdownTitleSettingKey);
-    if (titleSettingValue) {
-      setNewText(titleSettingValue);
-      setDisplayText(titleSettingValue);
-    }
-  }, []);
 
   const accept = useCallback(() => {
     setDisplayText(newText);

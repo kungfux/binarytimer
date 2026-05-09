@@ -15,7 +15,7 @@
     {
       "type": "npm",
       "script": "lint",
-      "problemMatcher": [],
+      "problemMatcher": ["$eslint-stylish"],
       "label": "npm: lint",
       "detail": "eslint .",
       "group": {

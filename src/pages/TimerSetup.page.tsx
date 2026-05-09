@@ -1,4 +1,4 @@
-import { createRef, useMemo } from "react";
+import { createRef, useLayoutEffect, useMemo } from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
@@ -20,17 +20,18 @@ function TimerSetup() {
         createRef<{
           isSelected: () => boolean;
           setAsSelected: (setAsSelected: boolean) => void;
-        }>()
+        }>(),
       ),
-    [bitCounter]
+    [bitCounter],
   );
 
   const handleBitClick = (index: number) => {
     setSelectedBits(bitCounter.reverseBit(index));
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isStopwatchMode) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedBits(bitCounter.setTime(0));
     }
   }, [bitCounter, isStopwatchMode]);
@@ -54,7 +55,7 @@ function TimerSetup() {
         disabled={!selectedBits.some((x) => x === 1) && !isStopwatchMode}
       />
     ),
-    [bitCounter, isStopwatchMode, navigate, selectedBits]
+    [bitCounter, isStopwatchMode, navigate, selectedBits],
   );
 
   const presetButtons = useMemo(() => {
@@ -91,7 +92,9 @@ function TimerSetup() {
       <p className="my-4">
         {selectedBits.some((x) => x === 1)
           ? `${bitCounter.toString(isStopwatchMode)}`
-          : isStopwatchMode ? "Press Start to begin" : "Select bits and press Start"}
+          : isStopwatchMode
+            ? "Press Start to begin"
+            : "Select bits and press Start"}
       </p>
       {startButton}
       {!isStopwatchMode && (
