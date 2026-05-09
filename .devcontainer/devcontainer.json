@@ -1,0 +1,13 @@
+{
+  "name": "kungfux/binary-timer",
+  "runArgs": ["--name", "binary-timer"],
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:4-24-trixie",
+  "customizations": {
+    "vscode": {
+      "extensions": ["esbenp.prettier-vscode"]
+    }
+  },
+  "forwardPorts": [5173],
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "shutdownAction": "stopContainer"
+}
