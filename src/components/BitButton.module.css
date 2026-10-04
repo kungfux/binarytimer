@@ -19,14 +19,10 @@
   background-color: var(--primary-color);
 }
 
-.button:nth-child(1),
-.button:nth-child(5),
-.button:nth-child(9) {
+.button:first-child {
   margin-left: .75rem;
 }
 
-.button:nth-child(4),
-.button:nth-child(8),
-.button:nth-child(12) {
+.button:last-child {
   margin-right: .75rem;
 }

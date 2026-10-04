@@ -5,9 +5,7 @@ const Footer = () => {
     <footer className={`${styles.footer} py-4 flex justify-center`}>
       <p className="my-4">
         <span className="uppercase">
-          <a href="https://github.com/kungfux/binarytimer">
-            12-bit binary timer
-          </a>
+          <a href="https://github.com/kungfux/binarytimer">Binary Timer</a>
         </span>
         <span className="px-2">by</span>
         <span>

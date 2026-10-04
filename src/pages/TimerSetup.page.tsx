@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { Button, ButtonType } from "../components/Button.component";
 import { useOptionsContext } from "../hooks/useOptionsContext.hook";
-import BitButton from "../components/BitButton.component";
+import BitGroups from "../components/BitGroups.component";
 import BitCounter from "../BitCounter";
 import styles from "./TimerSetup.module.css";
 
@@ -16,13 +16,13 @@ function TimerSetup() {
 
   const refs = useMemo(
     () =>
-      Array.from({ length: bitCounter.getMaximumBits() }, () =>
+      Array.from({ length: selectedBits.length }, () =>
         createRef<{
           isSelected: () => boolean;
           setAsSelected: (setAsSelected: boolean) => void;
         }>(),
       ),
-    [bitCounter],
+    [selectedBits.length],
   );
 
   const handleBitClick = (index: number) => {
@@ -75,19 +75,12 @@ function TimerSetup() {
         <span className={styles.typewriter} />
       </h1>
       <div className="flex flex-row justify-center align-center flex-wrap mt-8">
-        {selectedBits.map((_, index) => (
-          <BitButton
-            key={selectedBits.length - index - 1}
-            ref={refs[selectedBits.length - index - 1]}
-            isClickable={!isStopwatchMode}
-            isSelectedInitially={(() => {
-              return (
-                bitCounter.getBits()[selectedBits.length - index - 1] === 1
-              );
-            })()}
-            onClick={() => handleBitClick(selectedBits.length - index - 1)}
-          />
-        ))}
+        <BitGroups
+          bits={selectedBits}
+          refs={refs}
+          isClickable={!isStopwatchMode}
+          onBitClick={handleBitClick}
+        />
       </div>
       <p className="my-4">
         {selectedBits.some((x) => x === 1)

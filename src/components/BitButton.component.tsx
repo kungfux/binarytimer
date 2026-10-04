@@ -49,7 +49,7 @@ const BitButton = forwardRef(
     return (
       <button
         type="button"
-        aria-label="Bit"
+        aria-label="bit"
         title={selected ? "1" : "0"}
         className={`${styles.button} ${getClassName()}`}
         onMouseEnter={() => isClickable && setHovered(true)}

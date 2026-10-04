@@ -2,7 +2,7 @@ import { createRef, useCallback, useMemo } from "react";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import routes from "../routes";
-import BitButton from "../components/BitButton.component";
+import BitGroups from "../components/BitGroups.component";
 import BitCounter from "../BitCounter";
 import EditableTitle from "../components/EditableTitle.component";
 import { Button, ButtonType } from "../components/Button.component";
@@ -22,16 +22,17 @@ function TimerCountdown() {
     bitCounter.setTime(parseInt(timeParam || "0"));
     return bitCounter.getTime();
   });
+  const [bitPattern, setBitPattern] = useState(() => bitCounter.getBits());
 
   const refs = useMemo(
     () =>
-      Array.from({ length: bitCounter.getMaximumBits() }, () =>
+      Array.from({ length: bitPattern.length }, () =>
         createRef<{
           isSelected: () => boolean;
           setAsSelected: (setAsSelected: boolean) => void;
-        }>()
+        }>(),
       ),
-    [bitCounter]
+    [bitPattern.length],
   );
 
   const playCountdownSound = useCallback(() => {
@@ -73,16 +74,17 @@ function TimerCountdown() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const bits = isStopwatchMode
+      const nextBits = isStopwatchMode
         ? bitCounter.addTime(1)
         : bitCounter.reduceTime(1);
 
       refs.forEach((ref, index) => {
-        if (ref.current?.isSelected() !== (bits[index] === 1)) {
-          ref.current?.setAsSelected(bits[index] === 1);
+        if (ref.current?.isSelected() !== (nextBits[index] === 1)) {
+          ref.current?.setAsSelected(nextBits[index] === 1);
         }
       });
 
+      setBitPattern(nextBits);
       setTimeLeft(bitCounter.getTime());
     }, 1000);
     return () => clearTimeout(timer);
@@ -98,7 +100,7 @@ function TimerCountdown() {
         onClick={() => navigate(routes.root.path)}
       />
     ),
-    [navigate]
+    [navigate],
   );
 
   const addTimeButtons = useMemo(() => {
@@ -108,7 +110,7 @@ function TimerCountdown() {
         type={ButtonType.Secondary}
         text={`${value}m`}
         onClick={() => {
-          bitCounter.addTime(value * 60);
+          setBitPattern(bitCounter.addTime(value * 60));
           setTimeLeft(bitCounter.getTime());
         }}
       />
@@ -133,16 +135,7 @@ function TimerCountdown() {
         <div className="flex flex-col items-center justify-center text-center">
           <EditableTitle />
           <div className="flex flex-row justify-center align-center flex-wrap mt-8">
-            {refs.map((_, index) => (
-              <BitButton
-                key={refs.length - index - 1}
-                ref={refs[refs.length - index - 1]}
-                isClickable={false}
-                isSelectedInitially={(() => {
-                  return bitCounter.getBits()[refs.length - index - 1] === 1;
-                })()}
-              />
-            ))}
+            <BitGroups bits={bitPattern} refs={refs} isClickable={false} />
           </div>
           <p className="my-4">{bitCounter.toString(isStopwatchMode)}</p>
           {stopButton}

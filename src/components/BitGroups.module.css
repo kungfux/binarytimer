@@ -1,0 +1,42 @@
+.entering {
+    overflow: hidden;
+    animation: group-in 0.3s ease-out;
+}
+
+.leaving {
+    overflow: hidden;
+    pointer-events: none;
+    animation: group-out 0.3s ease-in forwards;
+}
+
+@keyframes group-in {
+    from {
+        max-width: 0;
+        opacity: 0;
+    }
+
+    to {
+        max-width: 24rem;
+        opacity: 1;
+    }
+}
+
+@keyframes group-out {
+    from {
+        max-width: 24rem;
+        opacity: 1;
+    }
+
+    to {
+        max-width: 0;
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion) {
+
+    .entering,
+    .leaving {
+        animation-duration: 0.01s;
+    }
+}

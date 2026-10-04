@@ -23,80 +23,52 @@
         content: "";
     }
 
-    5% {
-        content: "1";
+    8% {
+        content: "b";
     }
 
-    10% {
-        content: "12";
-    }
-
-    15% {
-        content: "12-";
-    }
-
-    20% {
-        content: "12-b";
+    16% {
+        content: "bi";
     }
 
     25% {
-        content: "12-bi";
+        content: "bin";
     }
 
-    30% {
-        content: "12-bit";
+    33% {
+        content: "bina";
     }
 
-    35% {
-        content: "12-bit ";
-    }
-
-    40% {
-        content: "12-bit b";
-    }
-
-    45% {
-        content: "12-bit bi";
+    41% {
+        content: "binar";
     }
 
     50% {
-        content: "12-bit bin";
+        content: "binary";
     }
 
-    55% {
-        content: "12-bit bina";
+    58% {
+        content: "binary ";
     }
 
-    60% {
-        content: "12-bit binar";
-    }
-
-    65% {
-        content: "12-bit binary";
-    }
-
-    70% {
-        content: "12-bit binary ";
+    66% {
+        content: "binary t";
     }
 
     75% {
-        content: "12-bit binary t";
+        content: "binary ti";
     }
 
-    80% {
-        content: "12-bit binary ti";
+    83% {
+        content: "binary tim";
     }
 
-    85% {
-        content: "12-bit binary tim";
-    }
-
-    90% {
-        content: "12-bit binary time";
+    91% {
+        content: "binary time";
     }
 
     100% {
-        content: "12-bit binary timer";
+        content: "binary timer";
     }
 }
 
