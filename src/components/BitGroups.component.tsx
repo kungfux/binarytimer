@@ -58,6 +58,7 @@ function BitGroups({
                   key={bitIndex}
                   ref={refs[bitIndex]}
                   isClickable={isClickable && !isLeaving}
+                  ariaLabel={`bit-${bitIndex}`}
                   isSelectedInitially={bits[bitIndex] === 1}
                   onClick={() => onBitClick?.(bitIndex)}
                 />

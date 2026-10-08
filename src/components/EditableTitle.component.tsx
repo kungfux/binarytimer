@@ -73,6 +73,7 @@ const EditableTitle = () => {
         icon={faPencil}
         color="#ffd43b"
         tooltip="Edit title"
+        tabIndex={0}
         onClick={() => setEditMode(true)}
       />
     ),
@@ -84,10 +85,18 @@ const EditableTitle = () => {
       className="flex flex-row flex-wrap items-center justify-center mb-8 w-full min-h-12"
       onMouseOver={() => setEditVisible(true)}
       onMouseOut={() => setEditVisible(false)}
+      onFocus={() => setEditVisible(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) {
+          setEditVisible(false);
+        }
+      }}
     >
       {!isEditMode && (
         <>
-          <h1 className="text-5xl uppercase">{displayText}</h1>
+          <h1 className="text-5xl uppercase" tabIndex={0}>
+            {displayText}
+          </h1>
           {isEditVisible && editButton}
         </>
       )}
@@ -95,6 +104,7 @@ const EditableTitle = () => {
         <>
           <input
             type="text"
+            title="Edit title"
             className={styles.input}
             value={newText}
             autoFocus

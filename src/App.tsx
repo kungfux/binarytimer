@@ -16,7 +16,7 @@ function App() {
 
   return (
     <OptionsProvider>
-      <div className="flex flex-col items-center justify-between min-h-screen h-screen min-w-96">
+      <main className="flex flex-col items-center justify-between min-h-screen h-screen">
         <div className="flex justify-end w-full p-4">
           <ModeButton />
           <HideButton />
@@ -29,7 +29,7 @@ function App() {
           />
         </Routes>
         <Footer />
-      </div>
+      </main>
     </OptionsProvider>
   );
 }

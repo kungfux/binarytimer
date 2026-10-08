@@ -26,3 +26,20 @@
 .button:last-child {
   margin-right: .75rem;
 }
+
+@media (max-width: 360px) {
+  .button {
+    height: 4rem;
+    width: 4rem;
+    margin-left: .125rem;
+    margin-right: .125rem;
+  }
+
+  .button:first-child {
+    margin-left: .5rem;
+  }
+
+  .button:last-child {
+    margin-right: .5rem;
+  }
+}

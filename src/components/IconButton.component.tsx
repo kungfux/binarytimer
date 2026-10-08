@@ -8,6 +8,7 @@ const IconButton = ({
   disabled = false,
   className,
   color,
+  tabIndex,
   onClick,
 }: {
   icon: IconDefinition;
@@ -15,6 +16,7 @@ const IconButton = ({
   disabled?: boolean;
   className?: string;
   color?: string;
+  tabIndex?: number;
   onClick?: () => void;
 }) => {
   return (
@@ -25,6 +27,7 @@ const IconButton = ({
       title={tooltip}
       className={[styles.icon, className].join(" ")}
       disabled={disabled}
+      tabIndex={tabIndex}
       onClick={onClick}
     >
       <FontAwesomeIcon icon={icon} style={{ color: color }} />

@@ -5,8 +5,8 @@
   --secondary-color: #61dafb;
   --foreground-color: #ffffffde;
   --background-color: #242424;
-  --link-color: #3498dbcc;
-  --link-active-color: #3498db;
+  --link-color: #78c8ff;
+  --link-active-color: #a4dcff;
 
   color-scheme: light dark;
   color: var(--foreground-color);
@@ -37,6 +37,8 @@ a {
   :root {
     color: var(--background-color);
     background-color: var(--foreground-color);
+    --link-color: #0969a5;
+    --link-active-color: #075483;
   }
 }
 
@@ -46,8 +48,8 @@ a {
   }
 
   #root {
-    min-width: 400px;
-    width: 400px;
+    min-width: 0;
+    width: 100%;
   }
 }
 

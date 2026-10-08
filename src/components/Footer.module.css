@@ -1,3 +1,9 @@
 .footer {
+  color: #b3b3b3;
+}
+
+@media (prefers-color-scheme: light) {
+  .footer {
     color: #666;
+  }
 }
